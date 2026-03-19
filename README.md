@@ -1,4 +1,32 @@
 # OpenAI 自动注册系统 v2
+## Docker 一键部署
+
+```bash
+# 一键启动（默认端口 8000，密码 admin123）
+docker run -d --name codex-register -p 8000:8000 -e APP_ACCESS_PASSWORD=your_password ghcr.io/daodao1982/chatgpt-codex:latest
+```
+
+或使用 docker-compose:
+
+```yaml
+version: "3.8"
+
+services:
+  codex-register:
+    image: ghcr.io/daodao1982/chatgpt-codex:latest
+    container_name: codex-register
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ACCESS_PASSWORD=your_password
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+```
+
+> 注意：首次运行会自动创建数据目录
+
 
 自动化注册 OpenAI 账号的 Web UI 系统，支持多种邮箱服务、并发批量注册、代理管理和账号管理。
 
